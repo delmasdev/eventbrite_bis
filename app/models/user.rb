@@ -16,7 +16,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   def welcome_send
-    ApplicationMailer.welcome_email(self).deliver_now
+    UserMailer.welcome_email(self).deliver_now
   end
 
 
