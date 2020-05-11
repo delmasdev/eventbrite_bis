@@ -4,13 +4,13 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :users, through: :attendances
 
-  validates :duration, presence: true, numericaly: {only_integer: true, other_than: 0, }
+  validates :duration, presence: true, numericality: {only_integer: true, other_than: 0, }
   validates :start_date, presence: true
   validates :start_date_cannot_be_in_the_past
   validates :duration_multiple
   validates :title, presence: true, lenght: {in: 5..140}
   validates :description, presence: true, lenght: {in: 20..1000}
-  validates :price, presence: true, numericaly: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: 'Doit être compris entre 1€ et 1000€' }
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: 'Doit être compris entre 1€ et 1000€' }
   validates :location, presence: true
 
   def start_date_cannot_be_in_the_past
