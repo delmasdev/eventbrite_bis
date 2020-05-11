@@ -67,12 +67,13 @@ Rails.application.configure do
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => ENV['GMAIL_LOGIN'],
-    :password             => ENV['GMAIL_PWD'],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
+    :user_name => ENV['SENDGRID_LOGIN'],
+  :password => ENV['SENDGRID_PWD'],
+  :domain => 'monsite.fr',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
   }
 
 end
