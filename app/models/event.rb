@@ -14,13 +14,13 @@ class Event < ApplicationRecord
   validates :location, presence: true
 
   def start_date_cannot_be_in_the_past
-    if start_date < Date.today
+    if start_date.present? && start_date < Date.today
       errors.add(:start_date, "Date non valide")
     end
   end
 
   def duration_multiple
-    if duration / 5 != 0
+    if duration % 5 != 0
       errors.add(:duration, "Durée non valide, 5min par 5min")
     end
   end

@@ -8,4 +8,12 @@ class UserMailer < ApplicationMailer
     @url = 'http://monsite.fr'
     mail(to: @user.email, subject: 'Bienvenue chez nous !')
   end
+
+  def new_participant_email(user)
+
+    @user = user
+    @url = 'http://monsite.fr'
+    mail(to: @user.email, subject: 'Un nouveau participant a ton évènement !')
+  end
+
 end
