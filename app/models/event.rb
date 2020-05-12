@@ -4,7 +4,6 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :users, through: :attendances
 
-  validates :duration, presence: true, numericality: {only_integer: true, other_than: 0, }
   validates :start_date, presence: true
   validate :start_date_cannot_be_in_the_past
   validate :duration_multiple
@@ -20,7 +19,7 @@ class Event < ApplicationRecord
   end
 
   def duration_multiple
-    if duration % 5 != 0
+    if duration.present? && duration % 5 != 0 && duration <= 0 && duration.class != Integer
       errors.add(:duration, "Durée non valide, 5min par 5min")
     end
   end

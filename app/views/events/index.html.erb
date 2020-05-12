@@ -1,2 +1,35 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .card-body {padding: 0.80rem;} .customc {min-width: 280px;}
+    a.customc, a.customc:hover {color: inherit;text-decoration: none;}
+    .col {min-width: 240px;}.custom-card {max-height: 370px;min-height: 280px;}
+    .custom-card:hover {box-shadow: 0 0 11px rgba(33,33,33,.2);}
+    .card-title {overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;}
+    .card-date {font-size: 13px;}
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-4">
+      <% @event.order([:id]).each do |event| %>
+          <% @id = Event.where(title: "#{event.title}").ids %>
+          <a href="<%= event_path(@id) %>" class="customc">
+            <div class="col mb-4">
+              <div class="card custom-card">
+                <img src="http://https://polar-wildwood-03758.herokuapp.com/assets/event.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-date text-primary"><%= event.start_date.strftime("%a %m %Y") %></p>
+                  <h6 class="card-title"><%= event.title %></h6>
+                </div>
+              </div>
+            </div>
+          </a>
+      <% end %>
+    </div>
+  </div>
+</body>
+
+</html>

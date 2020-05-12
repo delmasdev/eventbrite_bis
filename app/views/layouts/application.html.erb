@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<%= new_event_path %>">Créer un évenement</a>
+
         </li>
       </ul>
     </div>
@@ -43,13 +43,14 @@
         </div>
 
       <% else %>
-        <a class="btn btn-success" href="<%#= new_gossip_path %>">Créé un gossip</a>
+        <a class="btn btn-success" href="<%= new_event_path %>">Créé un événement</a>
         <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Deconnexion
+          Profil
         </button>
 
         <div class="dropdown-menu bg-warning" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item bg-warning" href="<%= destroy_user_session_path %>" data-method="DELETE">Se deconnecter</a>
+          <a class="dropdown-item bg-warning" href="<%= user_path(:id) %>">Profil</a>
         </div>
       <% end %>
         </div>

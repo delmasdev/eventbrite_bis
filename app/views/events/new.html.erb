@@ -1,0 +1,50 @@
+<html>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <br><br><br>
+          <%= form_tag url_for(action: 'create'), method: "post" do %>
+          <h1 class="h3 mb-3 font-weight-normal text-center">New Event<%#= current_user.id%><%#= @user_id%></h1>
+
+            <%label_tag 'Titre' %>
+            <%number_field_tag 'admin_id', current_user.id, {class: 'form-control'} %>
+
+          <div class="form-group">
+            <%= label_tag 'Titre' %>
+            <%= text_field_tag 'title', @event.title, {class: 'form-control'} %>
+          </div>
+          <div class="form-group">
+            <%= label_tag 'Description' %>
+            <%= text_area_tag 'description', @event.description, {class: 'form-control'} %>
+          </div>
+            <br />
+          <div class="form-group">
+            <%= label_tag 'Localisation' %>
+            <%= text_field_tag 'location', @event.location, {class: 'form-control'} %>
+          </div>
+            <br />
+          <div class="form-group">
+            <%= label_tag 'Prix' %>
+            <%= number_field_tag 'price', @event.price, {class: 'form-control'} %>
+          </div>
+            <br />
+          <div class="form-group">
+            <%= label_tag 'Date' %>
+            <%= text_field_tag 'start_date', @event.start_date, {class: 'form-control'} %>
+          </div>
+            <br />
+          <div class="form-group">
+            <%= label_tag 'Durée' %>
+            <%= number_field_tag 'duration', @event.duration, {class: 'form-control'} %>
+          </div>
+            <br />
+          <div class="actions mt-5">
+            <%= submit_tag "Create Event", {class:'btn btn-primary'} %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
