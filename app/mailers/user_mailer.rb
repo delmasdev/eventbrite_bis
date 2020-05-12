@@ -16,4 +16,11 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Un nouveau participant a ton évènement !')
   end
 
+
+def reset_passsword_instruction(user)
+
+    @user = user
+    @url = 'http://monsite.fr'
+    mail(to: @user.email, subject: 'Reset')
+  end
 end
