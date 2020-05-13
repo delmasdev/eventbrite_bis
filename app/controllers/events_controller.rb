@@ -15,14 +15,17 @@ class EventsController < ApplicationController
   end
 
   def create
+    puts 'X' * 70
+    puts params
+    puts'X' * 70
 
-    @event = Event.new(
-                        'title' => params[:title],
-                        'description' => params[:description],
-                        'location' => params[:location],
-                        'price' => params[:price],
-                        'start_date' => params[:start_date],
-                        'duration' => params[:duration])
+    @event = Event.new(  admin_id: current_user.id,
+                        title: params[:title],
+                        description: params[:description],
+                        location: params[:location],
+                        price: params[:price],
+                        start_date: params[:start_date],
+                        duration: params[:duration])
     @event.save
     redirect_to root_path
   end
