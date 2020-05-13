@@ -30,12 +30,12 @@
             <br />
           <div class="form-group">
             <%= label_tag 'Date' %>
-            <%= text_field_tag 'start_date', nil, {class: 'form-control'} %>
+            <%= date_field_tag 'start_date', nil, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Durée' %>
-            <%= number_field_tag 'duration', nil, {class: 'form-control'} %>
+            <%= number_field_tag 'duration', nil, {class: 'form-control', step: 5} %>
           </div>
             <br />
           <div class="actions mt-5">
