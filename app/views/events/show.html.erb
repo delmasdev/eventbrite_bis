@@ -5,8 +5,6 @@
     <style type="text/css">
       .card-img {
   object-fit: cover;
-
-
   height: 337px;
 }
     </style>
@@ -14,19 +12,50 @@
 
   <body>
     <div class="container mt-5">
+
       <div class="card bg-dark text-alert">
         <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img" alt="..." style="">
           <div class="card-img-overlay">
           </div>
-        </div>
+      </div>
+
         <h1 class="card-title "><%= @event.title %></h1>
-        <div class="mt-5">
-          <p>Date: <%= @event.start_date %></p>
-          <p>Durée: <%= @event.duration %> minutes</p>
-          <p>Ce qui vous attend: <%= @event.description %></p>
-          <p>Où: <%= @event.location %></p>
-          <p>Prix: <%= @event.price %>€</p>
+
+      <div class="row">
+
+        <div class="col col-6">
+          <div class="mt-5">
+            <p>Participants: <%= @event.users.count %></p>
+            <p>Date de début: <%= @event.start_date %></p>
+            <p>Date de fin: <%= @event.end_date %></p>
+            <p>Créé par: <%= @event.admin.last_name%> <%= @event.admin.first_name%></p>
+            <p>Contact: <%= @event.admin.email%></p>
+            <p>Durée: <%= @event.duration %> minutes</p>
+            <p>Ce qui vous attend: <%= @event.description %></p>
+            <p>Où: <%= @event.location %></p>
+            <p>Prix: <%= @event.price %>€</p>
+          </div>
         </div>
+
+        <div class="col col-6">
+          <div class="mt-5">
+            <% if user_signed_in? && current_user != @event.admin && @ifparticipe %>
+            <a class="btn btn-outline-dark btn-lg" href="<%= new_event_attendance_path(@event.id) %>" role="button">Participer à l'événement</a>
+            <% end %>
+
+            <% if @participe %>
+            <a class="btn btn-outline-dark btn-lg" href="<%= new_event_attendance_path(@event.id) %>" role="button">Tu participes</a>
+            <% end %>
+
+             <div class="actions mt-2">
+              <% if current_user == @event.admin %>
+               <%= button_to "delete_event", event_path, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+               <% end %>
+              </div>
+          </div>
+        </div>
+      </div>
+
       </div>
     </div>
   </body>

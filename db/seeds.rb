@@ -9,18 +9,20 @@ User.all.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('users')
 Event.all.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('events')
+Attendance.all.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('attendances')
 
 User.create(first_name: "John",
     last_name:  "Doe",
     description: "Coucou coucou tout le monde! ",
-    email: "johndoe@yopmail",
+    email: "johndoe@yopmail.com",
     password: "azerty12"
   )
 
 User.create(first_name: "Jess",
     last_name:  "Doe",
     description: "Coucou coucou tout le monde! ",
-    email: "jessdoe@yopmail",
+    email: "jessdoe@yopmail.com",
     password: "azerty12"
   )
 

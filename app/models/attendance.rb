@@ -8,7 +8,7 @@ class Attendance < ApplicationRecord
 
   validates :user, presence: true
   validates :event, presence: true
-  #validates :stripe_customer_id, presence: true
+  #validates :stripe_customer_id, presence: true, on: :create
 
   def new_participant_send
     UserMailer.new_participant_email(self.event.admin).deliver_now
