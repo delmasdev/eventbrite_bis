@@ -7,14 +7,49 @@
   object-fit: cover;
   height: 337px;
 }
+.stripe-button-el { display: none }
     </style>
   </head>
 
   <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <% [:success].each do |key| %>
+            <% if flash[:success] %>
+              <div class="alert alert-info">
+                <div class="<%= key %>" id="flash">
+                  Tu participes à l'événement !!
+                  <%= flash[:success] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+        <div class="container">
+      <div class="row">
+        <div class="col">
+          <% [:modif].each do |key| %>
+            <% if flash[:modif] %>
+              <div class="alert alert-info">
+                <div class="<%= key %>" id="flash">
+                  Tu as modifié l'événement !!
+                  <%= flash[:modif] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
 
       <div class="card bg-dark text-alert">
-        <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img" alt="..." style="">
+        <img src="<%= asset_path('event.jpg')%>" class="card-img" alt="..." style="">
           <div class="card-img-overlay">
           </div>
       </div>
@@ -33,18 +68,49 @@
             <p>Durée: <%= @event.duration %> minutes</p>
             <p>Ce qui vous attend: <%= @event.description %></p>
             <p>Où: <%= @event.location %></p>
-            <p>Prix: <%= @event.price %>€</p>
+            <% if @event.price == 0 %><p>Gratuit </p>
+              <% else %>
+             <p> Prix: <%= @event.price %>€</p>
+              <% end %>
+
+
+
           </div>
         </div>
 
         <div class="col col-6">
           <div class="mt-5">
-            <% if user_signed_in? && current_user != @event.admin && @ifparticipe %>
-            <a class="btn btn-outline-dark btn-lg" href="<%= new_event_attendance_path(@event.id) %>" role="button">Participer à l'événement</a>
+            <% if user_signed_in? && current_user != @event.admin && @ifparticipe && @event.price != 0%>
+
+              <%= form_tag event_attendances_path(params[:id]) do %>
+                <article>
+                  <% if flash[:error].present? %>
+                    <div id="error_explanation">
+                      <p><%= flash[:error] %></p>
+                    </div>
+                  <% end %>
+
+                </article>
+                <button class="btn btn-outline-dark btn-lg" onclick="checkout();">Participer à l'événement</button>
+                <script src="https://checkout.stripe.com/checkout.js"
+                 class="stripe-button"
+                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                        data-description="Participer à l'événement"
+                        data-amount="<%= @amount %>"
+                        data-locale="fr";
+                        data-currency="eur"
+                        type="text/javascript">
+                </script>
+              <% end %>
+
+              <% elsif @ifparticipe && @event.price == 0%>
+              <%= button_to "Participer à l'événement", event_attendances_path(params[:id]), method: :create, class: "btn btn-outline-dark btn-lg" %>
             <% end %>
 
+
+
             <% if @participe %>
-            <a class="btn btn-outline-dark btn-lg" href="<%= new_event_attendance_path(@event.id) %>" role="button">Tu participes</a>
+            <p class="btn btn-outline-dark btn-lg" role="button">Tu participes</p>
             <% end %>
 
              <div class="actions mt-2">
@@ -52,6 +118,14 @@
                <%= button_to "delete_event", event_path, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
                <% end %>
               </div>
+
+
+              <div class="actions mt-2">
+              <% if current_user == @event.admin %>
+            <a class="btn btn-outline-dark btn-lg" href="<%= event_attendances_path(@event.id) %>" role="button">Mon espace</a>
+               <% end %>
+              </div>
+
           </div>
         </div>
       </div>

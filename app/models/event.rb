@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   validate :duration_multiple
   validates :title, presence: true, length: {in: 5..140}
   validates :description, presence: true, length: {in: 20..1000}
-  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000, message: 'Doit être compris entre 1€ et 1000€' }
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1000, message: 'Doit être compris entre 1€ et 1000€' }
   validates :location, presence: true
 
   def start_date_cannot_be_in_the_past

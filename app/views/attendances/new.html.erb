@@ -1,3 +1,9 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col col-4"></div>
+
+
+ <div class="col col-4">
 <%= form_tag event_attendances_path(params[:event_id]) do %>
   <article>
     <% if flash[:error].present? %>
@@ -5,7 +11,7 @@
         <p><%= flash[:error] %></p>
       </div>
     <% end %>
-    <label class="amount">
+    <label class="amount btn btn-outline-dark btn-lg">
       <span><%= @amount / 100 %> €</span>
     </label>
   </article>
@@ -16,3 +22,9 @@
           data-amount="<%= @amount %>"
           data-locale="auto"></script>
 <% end %>
+</div>
+
+<div class="col col-4"></div>
+
+</div>
+</div>
